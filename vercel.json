@@ -1,0 +1,11 @@
+{
+    "rewrites": [
+      { "source": "/portfolio", "destination": "/portfolio.html" },
+      { "source": "/portfolio-albums", "destination": "/portfolio-albums.html" },
+      { "source": "/gallery", "destination": "/gallery.html" },
+      { "source": "/about", "destination": "/about.html" },
+      { "source": "/shop", "destination": "/shop.html" },
+      { "source": "/contact", "destination": "/contact.html" }
+    ]
+  }
+  
