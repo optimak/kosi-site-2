@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - KosiTheCreator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" sizes="32x32" href="data:image/png;base64,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">
+    <style>
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0 20px;
+        }
+
+        .service-tag {
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #333;
+            transition: background 0.2s;
+        }
+
+        .service-tag:hover {
+            background: #e0e0e0;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .cta-button:hover {
+            background: #333;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo"><a href="index.html">KosiTheCreator</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li class="has-dropdown">
+                    <a href="portfolio.html">PORTFOLIO</a>
+                    <div class="dropdown-menu">
+                        <a href="portfolio.html">PORTRAITS</a>
+                        <a href="portfolio-albums.html">ALBUM COVERS</a>
+                    </div>
+                </li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="shop.html" class="active">SHOP</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Header -->
+    <section class="page-header">
+        <div class="container">
+            <!-- <h1>Shop</h1>
+            <p>Original artwork, prints, and commission services</p> -->
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon-section">
+        <div class="container">
+            <div class="coming-soon-content">
+                <h2>Online Shop Coming Soon!</h2>
+                <!-- <p class="lead">I'm currently working on setting up my online shop where you'll be able to purchase prints, digital downloads, and commission custom artwork. This will include high-quality reproductions of my work as well as exclusive digital art pieces.</p> -->
+                
+                <div class="shop-features">
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h3>Art Prints</h3>
+                            <p>High-quality prints of my original artwork available in various sizes and premium paper options.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>Digital Downloads</h3>
+                            <p>Instant access to digital artwork files perfect for personal use, wallpapers, or printing at home.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>Commissions </h3>
+                            <p>Custom artwork including album covers, portraits, and character designs.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>Limited Editions</h3>
+                            <p>Exclusive, numbered prints and special artwork collections available only for a limited time.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notify-signup">
+                    <h3>Be the First to Know</h3>
+                    <p>Sign up to be notified when the shop launches and receive exclusive early access to new artwork and special offers.</p>
+                    <form class="notify-form">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn btn-primary">Notify Me</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="scrolling-nav">
+        <div class="marquee">
+            <span>
+                <a href="index.html">KosiTheCreator</a> • 
+                <a href="portfolio.html">PORTRAITS</a> • 
+                <a href="portfolio-albums.html">ALBUM COVERS</a> • 
+                <a href="contact.html">CONTACT</a> • 
+                <a href="https://www.instagram.com/KosiTheCreator/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a> • 
+                <a href="https://x.com/kosithecreator" target="_blank" rel="noopener noreferrer">TWITTER</a> • 
+                <a href="index.html">KosiTheCreator</a> • 
+                <a href="portfolio.html">PORTRAITS</a> • 
+                <a href="portfolio-albums.html">ALBUM COVERS</a> • 
+                <a href="contact.html">CONTACT</a> • 
+                <a href="https://www.instagram.com/KosiTheCreator/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a> • 
+                <a href="https://x.com/kosithecreator" target="_blank" rel="noopener noreferrer">TWITTER</a> • 
+            </span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- <footer>
+        <div class="container">
+            <p>&copy; 2024 KosiTheCreator. All rights reserved.</p>
+        </div>
+    </footer> -->
+
+    <script src="script.js"></script>
+</body>
+</html>
