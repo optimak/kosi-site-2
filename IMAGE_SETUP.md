@@ -1,119 +1,159 @@
 # Image Management System
 
-This website now has a dynamic image management system that makes it easy to add and organize your artwork images.
+This website uses a dynamic image management system with Cloudinary CDN integration for optimized image delivery.
 
-## Folder Structure
+## Image Hosting
 
-```
-images/
-├── artwork/          # Main artwork images
-├── gallery/          # Gallery images organized by category
-└── about/           # About page specific images
-```
+All images are hosted on **Cloudinary** (cloud-based image management and delivery service). This provides:
+- Automatic image optimization and compression
+- Responsive image delivery (different sizes for different devices)
+- Fast global CDN delivery
+- Automatic format conversion (WebP, AVIF when supported)
+
+## Cloudinary Setup
+
+Your Cloudinary account details:
+- **Cloud Name**: `dx8cmsjdw`
+- **Base URL**: `https://res.cloudinary.com/dx8cmsjdw/image/upload/`
 
 ## How to Add Images
 
-### 1. Add Your Images to the Folders
+### 1. Upload Images to Cloudinary
 
-Place your images in the appropriate folders:
-- **artwork/**: Your main artwork images (recommended: 800x1000px or similar)
-- **gallery/**: Gallery images (recommended: 600x800px for portraits, 600x900px for covers)
-- **about/**: About page images like your studio photo
+1. Log in to your Cloudinary account
+2. Upload your images to the media library
+3. Note the public ID of each uploaded image
 
 ### 2. Update the Image Configuration
 
-Edit `images-config.js` to point to your actual images:
+Edit `images-config.js` to add your Cloudinary image URLs:
 
 ```javascript
-// Example: Replace placeholder with your actual image
-'ethereal-visions': {
-    image: 'images/artwork/ethereal-visions.jpg',        // Your image
-    alt: 'Ethereal Visions - A surreal digital painting...',
-    title: 'ETHEREAL VISIONS'
+// Example: Adding a new artwork
+'new-artwork-id': {
+    image: 'https://res.cloudinary.com/dx8cmsjdw/image/upload/w_400,q_80,f_auto/your_image_public_id.jpg',
+    fullImage: 'https://res.cloudinary.com/dx8cmsjdw/image/upload/w_1200,q_80,f_auto/your_image_public_id.jpg',
+    alt: 'Description of your artwork',
+    title: 'ARTWORK TITLE'
 }
 ```
 
-### 3. Image Naming Convention
+### 3. Cloudinary URL Format
 
-Use descriptive, consistent names:
-- `ethereal-visions.jpg` (main artwork)
-- `fantasy-cover-1.jpg` (gallery image)
-- `self-portrait.png` (about page image)
+The URLs use Cloudinary transformations:
+- **Grid/Thumbnail images**: `w_400,q_80,f_auto` (width 400px, quality 80%, auto format)
+- **Full-size images**: `w_1200,q_80,f_auto` (width 1200px, quality 80%, auto format)
+
+### 4. Image Naming Convention
+
+Use descriptive, consistent public IDs in Cloudinary:
+- Use lowercase with underscores or hyphens: `opium_nnzolb`, `the_alchemist_jnxsts`
+- Keep the Cloudinary-generated suffix if present
 
 ## Features
 
 ### ✅ Automatic Image Loading
 - All images are loaded dynamically from the configuration
 - No need to manually update HTML files when adding new artwork
+- Images are served from Cloudinary CDN for fast loading
 
 ### ✅ Responsive Images
-- Optimized image loading
-- Automatic fallback to placeholders during development
+- Cloudinary automatically optimizes images for different screen sizes
+- Automatic format conversion (WebP, AVIF) for modern browsers
+- Lazy loading implemented for better performance
 
 ### ✅ Easy Management
-- Centralized image configuration
+- Centralized image configuration in `images-config.js`
 - Easy to add new artwork or gallery items
 - Automatic categorization for gallery filtering
+- Cloudinary dashboard for managing uploaded images
 
 ### ✅ SEO Friendly
 - Proper alt text for all images
 - Descriptive titles and captions
-- Optimized loading
+- Optimized loading with Cloudinary transformations
 
 ## Quick Start
 
-1. **Add your first image:**
-   - Save your artwork as `images/artwork/my-artwork.jpg`
-   - Create a thumbnail as `images/thumbnails/my-artwork-thumb.jpg`
-   - Update the configuration in `images-config.js`
+1. **Upload your first image to Cloudinary:**
+   - Log in to Cloudinary dashboard
+   - Upload your artwork image
+   - Copy the public ID (e.g., `my_artwork_abc123`)
 
-2. **Test the changes:**
+2. **Add to configuration:**
+   - Open `images-config.js`
+   - Add a new entry in the `IMAGES.artwork` object:
+   ```javascript
+   'my-artwork': {
+       image: 'https://res.cloudinary.com/dx8cmsjdw/image/upload/w_400,q_80,f_auto/my_artwork_abc123.jpg',
+       fullImage: 'https://res.cloudinary.com/dx8cmsjdw/image/upload/w_1200,q_80,f_auto/my_artwork_abc123.jpg',
+       alt: 'Description of artwork',
+       title: 'ARTWORK TITLE'
+   }
+   ```
+
+3. **Test the changes:**
    - Refresh your website
    - Your image should appear automatically
 
-3. **Add more images:**
-   - Follow the same pattern for each new artwork
-   - Update the configuration file accordingly
-
 ## Image Specifications
 
-### Recommended Sizes:
-- **Main Artwork**: 800x1000px (4:5 ratio)
-- **Gallery Images**: 600x800px (portraits) or 600x900px (covers)
-- **About Page**: 500x600px
+### Recommended Upload Sizes:
+- **Main Artwork**: Upload at high resolution (2000px+ width recommended)
+- **Gallery Images**: Upload at high resolution (1500px+ width recommended)
+- Cloudinary will automatically resize based on the transformation parameters
 
-### File Formats:
+### Cloudinary Transformations Used:
+- **Grid/Thumbnail**: `w_400,q_80,f_auto` - 400px width, 80% quality, auto format
+- **Full View**: `w_1200,q_80,f_auto` - 1200px width, 80% quality, auto format
+- **About Page**: `w_400,q_95,f_auto` - 400px width, 95% quality, auto format
+
+### Supported Upload Formats:
 - **JPEG**: Best for photographs and complex artwork
 - **PNG**: Best for artwork with transparency
-- **WebP**: Best for modern browsers (smaller file sizes)
+- **WebP**: Automatically converted by Cloudinary when supported
+- Cloudinary supports many other formats and will convert as needed
+
+## Configuration Structure
+
+The `images-config.js` file contains three main sections:
+
+1. **`IMAGES.artwork`**: Main artwork displayed on the portfolio/index page
+2. **`IMAGES.gallery`**: Gallery images organized by category (covers, portraits, traditional)
+3. **`IMAGES.about`**: About page specific images
+
+Each image entry requires:
+- `image`: Cloudinary URL for thumbnail/grid view
+- `fullImage`: Cloudinary URL for full-size view
+- `alt`: Alt text for accessibility
+- `title`: Display title
 
 ## Troubleshooting
 
 ### Images Not Loading?
-1. Check that the file paths in `images-config.js` match your actual files
-2. Ensure image files are in the correct folders
-3. Check browser console for any error messages
+1. Verify the Cloudinary URLs in `images-config.js` are correct
+2. Check that the public ID matches what's in your Cloudinary account
+3. Check browser console for any CORS or 404 errors
+4. Verify your Cloudinary account is active and images are publicly accessible
 
-### Images Too Large?
-1. Optimize your images before uploading
-2. Use appropriate thumbnail sizes
-3. Consider using WebP format for better compression
+### Images Too Large/Slow?
+1. Cloudinary automatically optimizes, but you can adjust quality:
+   - Change `q_80` to `q_70` for smaller file sizes
+   - Adjust width parameters (`w_400` to `w_300` for thumbnails)
+2. Ensure you're using the correct transformation for the use case
+3. Check Cloudinary dashboard for image optimization suggestions
 
 ### Need to Add New Categories?
-1. Add new categories to the `IMAGES.gallery` object
-2. Update the `getCategoryForImage()` function in `script.js`
+1. Add new categories to the `IMAGES.gallery` object in `images-config.js`
+2. Update the `getCategoryForImage()` function in `script.js` if needed
 3. Add corresponding filter buttons in `gallery.html`
 
-## Development Mode
+## Local Image Folders
 
-The system automatically generates placeholder images during development. To disable this and use your real images:
+The `images/` folder structure exists for reference and potential future use, but currently all images are served from Cloudinary. If you need to switch to local images:
 
-1. Comment out or remove this line in `images-config.js`:
-   ```javascript
-   // ImageManager.generatePlaceholders();
-   ```
+1. Place images in the appropriate folders (`images/artwork/`, `images/gallery/`, `images/about/`)
+2. Update `images-config.js` to use local paths instead of Cloudinary URLs
+3. Remove Cloudinary transformations from the URLs
 
-2. Add your actual images to the folders
-3. Update the configuration file with your image paths
-
-Your website is now ready for easy image management! 🎨
+Your website is now ready for easy image management with Cloudinary! 🎨
