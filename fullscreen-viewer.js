@@ -31,6 +31,7 @@
             <button class="nav-arrow prev" type="button" aria-label="Previous artwork" data-overlay-prev>‹</button>
             <button class="nav-arrow next" type="button" aria-label="Next artwork" data-overlay-next>›</button>
             <button class="overlay-close" type="button" aria-label="Close artwork view">×</button>
+            <div class="overlay-status" data-overlay-status></div>
         `;
 
         document.body.appendChild(overlay);
@@ -40,6 +41,7 @@
         state.prevBtn = overlay.querySelector('[data-overlay-prev]');
         state.nextBtn = overlay.querySelector('[data-overlay-next]');
         state.closeBtn = overlay.querySelector('.overlay-close');
+        state.statusElement = overlay.querySelector('[data-overlay-status]');
 
         state.prevBtn.addEventListener('click', () => changeIndex(-1));
         state.nextBtn.addEventListener('click', () => changeIndex(1));
@@ -59,11 +61,29 @@
         }
 
         const item = state.items[state.currentIndex];
-        state.imageElement.src = item.fullImage || item.image;
+        const src = item.placeholder || item.image;
+        state.imageElement.style.opacity = '0';
+        state.imageElement.style.filter = 'blur(16px)';
+        state.imageElement.src = src;
         state.imageElement.alt = item.alt || item.title || '';
+
+        const highResImage = new Image();
+        highResImage.src = item.fullImage || item.image;
+        highResImage.onload = () => {
+            if (!state.imageElement) return;
+            state.imageElement.src = highResImage.src;
+            state.imageElement.style.transition = 'opacity 0.4s ease, filter 0.4s ease';
+            state.imageElement.style.opacity = '1';
+            state.imageElement.style.filter = 'none';
+        };
+        highResImage.onerror = () => {
+            state.imageElement.style.opacity = '1';
+            state.imageElement.style.filter = 'none';
+        };
 
         state.prevBtn.disabled = state.currentIndex === 0;
         state.nextBtn.disabled = state.currentIndex === state.items.length - 1;
+        updateStatus();
     }
 
     function changeIndex(delta) {
@@ -75,6 +95,21 @@
         if (nextIndex !== state.currentIndex) {
             state.currentIndex = nextIndex;
             updateContent();
+        }
+    }
+
+    function updateStatus() {
+        if (!state.statusElement) return;
+
+        if (state.currentIndex === 0) {
+            state.statusElement.textContent = 'Start of collection';
+            state.statusElement.classList.add('status-visible');
+        } else if (state.currentIndex === state.items.length - 1) {
+            state.statusElement.textContent = 'End of collection';
+            state.statusElement.classList.add('status-visible');
+        } else {
+            state.statusElement.textContent = '';
+            state.statusElement.classList.remove('status-visible');
         }
     }
 

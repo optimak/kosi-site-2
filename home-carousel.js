@@ -74,9 +74,12 @@ const featuredPieces = featuredPiecesRaw.map((piece) => {
         image: `${BASE_IMAGE_URL}/w_1000,q_auto:good,f_auto/${piece.version}/${encodeURIComponent(
             publicId
         )}.jpg`,
-        fullImage: `${BASE_IMAGE_URL}/w_1200,q_auto:good,f_auto/${piece.version}/${encodeURIComponent(
+        fullImage: `${BASE_IMAGE_URL}/w_960,q_auto:good,f_webp/${piece.version}/${encodeURIComponent(
             publicId
-        )}.jpg`,
+        )}.webp`,
+        placeholder: `${BASE_IMAGE_URL}/w_80,q_1,e_blur:300,f_webp/${piece.version}/${encodeURIComponent(
+            publicId
+        )}.webp`,
         publicId
     };
 });

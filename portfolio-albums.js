@@ -23,7 +23,8 @@ const ALBUM_COVERS = [
         ...cover,
         alt: `${cover.title} album cover by KosiTheCreator`,
         image: `${base}/w_600,q_auto:good,f_auto/${path}`,
-        fullImage: `${base}/w_1400,q_auto:good,f_auto/${path}`
+        fullImage: `${base}/w_960,q_auto:good,f_webp/${path}.webp`,
+        placeholder: `${base}/w_80,q_1,e_blur:300,f_webp/${path}.webp`
     };
 });
 

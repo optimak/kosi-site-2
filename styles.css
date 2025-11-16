@@ -539,6 +539,35 @@ nav {
     background: var(--accent-alt);
 }
 
+.nav-arrow:disabled {
+    opacity: 0.35;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+    cursor: not-allowed;
+    border-color: transparent;
+}
+
+.overlay-status {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    background: rgba(0, 41, 81, 0.8);
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    letter-spacing: clamp(0.2em, 0.8vw, 0.4em);
+    text-transform: uppercase;
+    font-size: clamp(0.65rem, 1.4vw, 0.95rem);
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+}
+
+.overlay-status.status-visible {
+    opacity: 1;
+}
+
 body.overlay-open {
     overflow: hidden;
 }
@@ -569,6 +598,7 @@ body.overlay-open {
     object-fit: contain;
     border-radius: 4px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    /* transition: opacity 0.4s ease, filter 0.4s ease; */
 }
 
 /* Navigation Arrows */
@@ -608,10 +638,16 @@ body.overlay-open {
 
 .nav-arrow.prev {
     left: 2rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #fff;
 }
 
 .nav-arrow.next {
     right: 2rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #fff;
 }
 
 /* Page Header Styles */
